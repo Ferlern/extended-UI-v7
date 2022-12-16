@@ -1,0 +1,9 @@
+{
+    "name": "extended-ui",
+    "displayName": "[orange]extended[gold] UI",
+    "author": "wizer",
+    "description": "UNSTABLE V7 PORT. Extend your ui with some useful things.\n\nYou can easily disable any of the mod features in the settings -> graphics -> extended UI.\n\nIf u have any bugs or ideas create an issue on github or contact me in discord: WiZeR1233#9336",
+    "version": "0.74",
+    "minGameVersion": "136",
+    "hidden": true
+}
