@@ -46,6 +46,10 @@ Events.on(ClientLoadEvent, () => {
             base = AttributeSmelter.AttributeSmelterBuild;
         } else if (block instanceof GenericCrafter) {
             base = GenericCrafter.GenericCrafterBuild;
+        } else if (block instanceof BurstDrill) {
+            base = BurstDrill.BurstDrillBuild;
+        } else if (block instanceof BeamDrill) {
+            base = BeamDrill.BeamDrillBuild;
         } else if (block instanceof Drill) {
             base = Drill.DrillBuild;
         } else if (block instanceof ImpactReactor) {
