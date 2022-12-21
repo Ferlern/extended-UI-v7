@@ -1,3 +1,3 @@
 module.exports = [
-    'alpha', 'beta', 'gamma'
+    'alpha', 'beta', 'gamma', 'evoke', 'incite', 'emanate'
 ]
