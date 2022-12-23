@@ -1,3 +1,3 @@
 module.exports = [
-    'mono', 'poly', 'mega'
+    'mono', 'poly', 'mega', 'assembly-drone', 'manifold'
 ]
