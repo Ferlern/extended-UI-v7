@@ -1,5 +1,6 @@
 const iconsUtil = require("extended-ui/utils/icons");
 const coreUnits = require("extended-ui/units/core-units");
+const blacklist = require("extended-ui/units/blacklist");
 const euiEvents = require("extended-ui/utils/event/events");
 
 let selectUnitDialog;
@@ -42,7 +43,7 @@ Events.on(ClientLoadEvent, () => {
     let r = 0;
     selectUnitDialog.cont.pane(table => {
         for (let [unitName, unitImage] of Object.entries(unitSprites)) {
-            if (unitName == "block" || coreUnits.includes(unitName)) continue;
+            if (unitName == "block" || coreUnits.includes(unitName) || blacklist.includes(unitName)) continue;
             const setted_name = unitName;
             let imageButton = table.button(unitImage, Styles.cleari, () => {
                 Core.settings.put("eui-auto-unit", setted_name);
