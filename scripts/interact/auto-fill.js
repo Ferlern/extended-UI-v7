@@ -37,6 +37,9 @@ Events.run(Trigger.update, () => {
 
     if (stack.amount) {
         Call.transferInventory(player, core);
+        if (stack.amount > 0) {
+            Call.dropItem(0);
+        }
     } else {
         Call.requestItem(player, core, request, 999);
     }
