@@ -2,7 +2,7 @@ Events.on(EventType.ClientLoadEvent, () => {
     const settings = Vars.ui.settings.graphics;
     settings.row();
     settings.button(Core.bundle.get("eui.name"), Styles.defaultt, () => extendedUIDialogSettings.show()).width(240).height(50);
-    
+
     const extendedUIDialogSettings = new BaseDialog(Core.bundle.get("eui.settings"));
     extendedUIDialogSettings.addCloseButton();
     extendedUIDialogSettings.buttons.defaults().size(240, 60);
@@ -39,7 +39,30 @@ Events.on(EventType.ClientLoadEvent, () => {
         contentTable.checkPref("eui-makeMineble", false);
         contentTable.checkPref("eui-showInteractSettings", true);
         contentTable.sliderPref("eui-action-delay", 500, 0, 3000, 25, i => i + " ms");
-        if (!Vars.mobile) {
+        extendedUIDialogSettings.button(Core.bundle.get("eui.config"), Styles.defaultt, () => extendedUIAutofillSettings.show()).width(240).height(50);
+  
+    const extendedUIAutofillSettings = new BaseDialog(Core.bundle.get("eui.autofillsettings"));
+    extendedUIAutofillSettings.addCloseButton();
+    extendedUIAutofillSettings.buttons.defaults().size(240, 60);
+
+    extendedUIAutofillSettings.cont.pane((() => {
+
+        let contentTable1;
+        if (Version.number < 7) {
+            contentTable1 = new Packages.arc.scene.ui.SettingsDialog.SettingsTable();
+        } else {
+            contentTable1 = new SettingsMenuDialog.SettingsTable();
+        }
+
+       
+     
+        contentTable1.sliderPref("eui-MinimalResourcesInCore", 30, 10, 500, 10, i => i);
+        contentTable1.sliderPref("eui-MinimalResourcesInCore2", 10, 10, 500, 10, i => i);
+  
+
+        return contentTable1;
+    })()); 
+ if (!Vars.mobile) {
             contentTable.checkPref("eui-DragBlock", false);
             contentTable.checkPref("eui-DragPathfind", false);
         }
