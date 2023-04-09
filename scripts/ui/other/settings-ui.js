@@ -4,11 +4,11 @@ Events.on(EventType.ClientLoadEvent, () => {
     settings.button(Core.bundle.get("eui.name"), Styles.defaultt, () => extendedUIDialogSettings.show()).width(240).height(50);
 
     const extendedUIDialogSettings = new BaseDialog(Core.bundle.get("eui.settings"));
-    extendedUIDialogSettings.addCloseButton();
+extendedUIDialogSettings.addCloseButton();
     extendedUIDialogSettings.buttons.defaults().size(240, 60);
-
+   
     extendedUIDialogSettings.cont.pane((() => {
-
+             
         let contentTable;
         if (Version.number < 7) {
             contentTable = new Packages.arc.scene.ui.SettingsDialog.SettingsTable();
@@ -39,10 +39,12 @@ Events.on(EventType.ClientLoadEvent, () => {
         contentTable.checkPref("eui-makeMineble", false);
         contentTable.checkPref("eui-showInteractSettings", true);
         contentTable.sliderPref("eui-action-delay", 500, 0, 3000, 25, i => i + " ms");
-        extendedUIDialogSettings.button(Core.bundle.get("eui.config"), Styles.defaultt, () => extendedUIAutofillSettings.show()).width(240).height(50);
+        contentTable.row()
+        contentTable.button(Core.bundle.get("eui.config"), Styles.defaultt, () => extendedUIAutofillSettings.show()).width(240).height(50);
   
     const extendedUIAutofillSettings = new BaseDialog(Core.bundle.get("eui.autofillsettings"));
-    extendedUIAutofillSettings.addCloseButton();
+  
+  extendedUIAutofillSettings.addCloseButton();
     extendedUIAutofillSettings.buttons.defaults().size(240, 60);
 
     extendedUIAutofillSettings.cont.pane((() => {
@@ -61,7 +63,7 @@ Events.on(EventType.ClientLoadEvent, () => {
   
 
         return contentTable1;
-    })()); 
+    })());
  if (!Vars.mobile) {
             contentTable.checkPref("eui-DragBlock", false);
             contentTable.checkPref("eui-DragPathfind", false);
