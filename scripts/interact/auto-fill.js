@@ -1,5 +1,4 @@
 const timer = require("extended-ui/interact/interact-timer");
-
 Events.run(Trigger.update, () => {
     if (!Core.settings.getBool("eui-auto-fill", false) || !timer.canInteract()) return;
     const player = Vars.player;
@@ -48,7 +47,8 @@ function getBestAmmo(turret, core) {
     let bestDamage = 0;
     turret.ammoTypes.each((item, ammo) => {
         let totalDamage = ammo.damage + ammo.splashDamage;
-        if (totalDamage > bestDamage && core.items.get(item) >= 20) {
+        let mincore = 0 + Core.settings.getInt("eui-MinimalResourcesInCore", 30);
+        if (totalDamage > bestDamage && core.items.get(item) >= mincore) {
             best = item;
             bestDamage = totalDamage;
         }
@@ -79,8 +79,9 @@ function getItemRequest(build, block, core) {
 function getFilterRequest(filter, build, core) {
     let request = null;
     let stop = false;
+    let mincore1 = 0 + Core.settings.getInt("eui-MinimalResourcesInCore2", 30);
     Vars.content.items().each(item => {
-        if (filter.filter.get(item) && item != Items.blastCompound && core.items.get(item) >= 20) {
+        if (filter.filter.get(item) && item != Items.blastCompound && core.items.get(item) >= mincore1) {
             if (build.acceptStack(item, 20, Vars.player.unit()) >= 5 && request == null && !stop) {
                 request = item;
             } else {
@@ -94,7 +95,8 @@ function getFilterRequest(filter, build, core) {
 function findRequiredItem(stacks, build, core) {
     for (let itemStack of stacks) {
         let item = itemStack.item;
-        if (core.items.get(item) >= 20 && build.acceptStack(item, 20, Vars.player.unit()) >= 5) {
+        let mincore1 = 0 + Core.settings.getInt("eui-MinimalResourcesInCore2", 30);
+        if (core.items.get(item) >= mincore1 && build.acceptStack(item, 20, Vars.player.unit()) >= 5) {
             return item;
         }
     }
