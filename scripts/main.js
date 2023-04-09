@@ -15,7 +15,8 @@ const modules = [
     "interact/auto-fill",
     "interact/auto-unit",
     "interact/schematic-selector",
-
+    
+     "ui/other/settings-ui1",
     "ui/other/settings-ui",
     "ui/other/schematics-table-ui",
     "ui/other/power-ui",
