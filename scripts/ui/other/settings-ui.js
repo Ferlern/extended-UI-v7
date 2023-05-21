@@ -46,4 +46,5 @@ Events.on(EventType.ClientLoadEvent, () => {
 
         return contentTable;
     })());
+    global.eui.settings = extendedUIDialogSettings;
 });
