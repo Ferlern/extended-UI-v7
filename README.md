@@ -2,7 +2,7 @@
 
 Mod for game mindustry that extend your ui with some useful things.
 
-You can easily disable any of the following features in the settings -> graphics -> extended UI if you don't like it.
+You can easily disable any of the following features in the settings -> extended UI if you don't like it.
 Some features is disabled by default. It'll not work if u doesn't enable it first.
 
 (if you have low fps with a large number of units, turn off health bars).
