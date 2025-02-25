@@ -40,7 +40,9 @@ const listener = (startPos, startTile, pos, mouseTile) => {
     if (!destination) return;
 
     const startBlock = startTile.block();
-    buildPlans = pathfindSelector(startBlock)(startTile, destination, mouseTile, startBlock);
+    if (pathfindSelector(startBlock)) {
+        buildPlans = pathfindSelector(startBlock)(startTile, destination, mouseTile, startBlock);
+    }
 }
 
 euiEvents.on(euiEvents.eventType.dragStarted, (startPos, startTile) => {
