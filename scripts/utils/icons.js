@@ -29,8 +29,8 @@ exports.getByName = function(name) {
 
 const spriteClasses = [Items, Liquids, UnitTypes, StatusEffects, Blocks]
 const spriteStorage = [];
-let allIcons = {};
-let allSprites = {};
+let allIcons = Object.create(null, {});
+let allSprites = Object.create(null, {});
 
 function setupSprites() {
     for (let spriteClass of spriteClasses) {
