@@ -7,6 +7,7 @@ let prevSelectedUnitType = null;
 let checkEndTime = 0;
 
 Events.run(Trigger.update, () => {
+    if (Vars.player.unit() == null) return;
     const selectedUnitType = Core.settings.getString("eui-auto-unit");
 
     if (selectedUnitType != prevSelectedUnitType) {
@@ -31,6 +32,7 @@ Events.run(Trigger.update, () => {
 });
 
 Events.on(UnitCreateEvent, (event) => {
+    if (Vars.player.unit() == null) return;
     const selectedUnitType = Core.settings.getString("eui-auto-unit");
     const unit = event.unit;
 

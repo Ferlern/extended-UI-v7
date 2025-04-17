@@ -27,8 +27,8 @@ Events.on(EventType.ClientLoadEvent, () => {
         contentTable.checkPref("eui-ShowResourceRate", false);
         contentTable.checkPref("eui-ShowSchematicsTable", true);
         contentTable.checkPref("eui-ShowSchematicsPreview", true);
-        contentTable.sliderPref("eui-SchematicsTableRows", 4, 2, 10, 1, i => i);
-        contentTable.sliderPref("eui-SchematicsTableColumns", 5, 4, 8, 1, i => i);
+        contentTable.sliderPref("eui-SchematicsTableRows", 4, 2, 20, 1, i => i);
+        contentTable.sliderPref("eui-SchematicsTableColumns", 5, 4, 16, 1, i => i);
         contentTable.sliderPref("eui-SchematicsTableButtonSize", 30, 20, 80, 5, i => i);
         contentTable.checkPref("eui-ShowEfficiency", false);
         contentTable.sliderPref("eui-EfficiencyTimer", 15, 10, 180, 5, i => i);

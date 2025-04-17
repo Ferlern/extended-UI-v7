@@ -3,37 +3,58 @@ const timer = require("extended-ui/interact/interact-timer");
 Events.run(Trigger.update, () => {
     if (!Core.settings.getBool("eui-auto-fill", false) || !timer.canInteract()) return;
     const player = Vars.player;
+    if (player.unit() == null) return;
     const stack = player.unit().stack;
     const team = player.team();
     const core = player.closestCore();
     const isCoreAvailible = Core.settings.getBool("eui-interact-core", false) && core;
 
-    let tranfered = false;
     let request = null;
+    let requestPriority = -1;
+    let config = Core.settings.getJson("eui.autofill.priority", ObjectMap, () => new ObjectMap());
 
     Vars.indexer.eachBlock(team, player.x, player.y, Vars.buildingRange, () => true, b => {
         if (!timer.canInteract()) return;
 
         const block = b.tile.block();
         if (!block.consumers.find(c => c instanceof ConsumeItems || c instanceof ConsumeItemFilter || c instanceof ConsumeItemDynamic)) return;
+        const blockPriority = config.get(block.name, 0);
+
+        // We want insert requests to have priority over deposit requests
+        if (blockPriority < requestPriority) return;
+        if (blockPriority == requestPriority && request instanceof Building) return;
 
         if (b.acceptStack(stack.item, stack.amount, player.unit()) >= 5) {
-            Call.transferInventory(player, b);
-            timer.increase();
-            tranfered = true;
+            request = b;
+            requestPriority = blockPriority;
+            return;
         }
 
-        if (!isCoreAvailible || request) return;
+        if (blockPriority <= requestPriority) return;
+
+        let newRequest = null;
+        if (!isCoreAvailible) return;
         if (block instanceof ItemTurret) {
             if (!b.ammo.isEmpty()) return;
-            request = getBestAmmo(block, core);
+            newRequest = getBestAmmo(block, core);
         } else if (block instanceof UnitFactory) {
-            request = getUnitFactoryRequest(b, block, core);
+            newRequest = getUnitFactoryRequest(b, block, core);
         } else if (b.items) {
-            request = getItemRequest(b, block, core);
+            newRequest = getItemRequest(b, block, core);
+        }
+        if (newRequest) {
+            request = newRequest;
+            requestPriority = blockPriority;
         }
     });
-    if (!isCoreAvailible || tranfered || !request || !player.within(core, Vars.buildingRange)) return;
+
+    if (request instanceof Building) {
+        Call.transferInventory(player, request);
+        timer.increase();
+        return;
+    }
+
+    if (!isCoreAvailible || !request || !player.within(core, Vars.buildingRange)) return;
 
     if (stack.amount) {
         Call.transferInventory(player, core);
