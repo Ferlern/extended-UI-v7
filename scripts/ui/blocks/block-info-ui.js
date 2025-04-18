@@ -88,7 +88,9 @@ function clearTable() {
 function buildTable(build) {
     const power = build.power;
     const items = build.items;
-    const config = build.config();
+    // If there's a field named "config" rhino will give it instead of always defined for Buinding
+    // subclasses "config" method. See LangindPad implementation for example
+    const config = typeof build.config == 'function' ? build.config() : build.config;
     const displayPower = power && !isPlayerTeam;
     const displayItems = items && build.items.total() > 0 && (!isPlayerTeam || build.items.total() <= 50);
     const displayConfig = typeof config == "string" && !isPlayerTeam;
