@@ -12,11 +12,18 @@ const modules = [
     "input/core-drag",
     "input/conveyor",
 
+    "interact/player-busy",
+    "interact/storage-fill",
+    "interact/storage-drain",
     "interact/auto-fill",
+    "interact/auto-collect",
+    "interact/auto-pilot",
     "interact/auto-unit",
     "interact/schematic-selector",
 
     "ui/other/settings-ui",
+    "ui/blocks/storage-click-ui",
+    "ui/blocks/storage-hover-ui",
     "ui/other/schematics-table-ui",
     "ui/other/power-ui",
     "ui/other/resource-rate-ui",
